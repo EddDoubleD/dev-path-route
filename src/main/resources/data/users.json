@@ -1,0 +1,20 @@
+[
+  {
+    "username": "admin",
+    "email" : "admin@orunmila.com",
+    "password" :  "adminpwd",
+    "role" : "ADMIN"
+  },
+  {
+    "username": "manager",
+    "email" : "manager@orunmila.com",
+    "password" :  "managerpwd",
+    "role" : "MANAGER"
+  },
+  {
+    "username": "user",
+    "email" : "user@orunmila.com",
+    "password" : "userpwd",
+    "role" : "USER"
+  }
+]
