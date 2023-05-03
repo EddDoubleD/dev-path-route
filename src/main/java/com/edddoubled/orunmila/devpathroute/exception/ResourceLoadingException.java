@@ -1,16 +1,16 @@
 package com.edddoubled.orunmila.devpathroute.exception;
 
 public class ResourceLoadingException extends Exception {
-    public ResourceLoadingException(String message) {
-        super(message);
-    }
+	public ResourceLoadingException(String message) {
+		super(message);
+	}
 
 
-    public ResourceLoadingException(Throwable throwable) {
-        super(throwable);
-    }
+	public ResourceLoadingException(Throwable throwable) {
+		super(throwable);
+	}
 
-    public ResourceLoadingException(String message, Throwable throwable) {
-        super(message, throwable);
-    }
+	public ResourceLoadingException(String message, Throwable throwable) {
+		super(message, throwable);
+	}
 }

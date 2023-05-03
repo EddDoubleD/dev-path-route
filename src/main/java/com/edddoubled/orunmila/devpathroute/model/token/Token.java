@@ -1,8 +1,8 @@
 package com.edddoubled.orunmila.devpathroute.model.token;
 
+import com.edddoubled.orunmila.devpathroute.model.user.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
@@ -12,18 +12,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
-public class Token {
+public class Token extends BaseEntity {
 
-    @Id
-    String id;
+	String token;
 
-    String token;
+	TokenType tokenType = TokenType.BEARER;
 
-    TokenType tokenType = TokenType.BEARER;
+	boolean revoked;
 
-    boolean revoked;
+	boolean expired;
 
-    boolean expired;
-
-    String userId;
+	String userId;
 }

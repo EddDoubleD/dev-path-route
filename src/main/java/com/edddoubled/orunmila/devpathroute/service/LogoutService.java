@@ -17,27 +17,27 @@ import static com.edddoubled.orunmila.devpathroute.utils.Const.AUTHORIZATION;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class LogoutService implements LogoutHandler {
-    TokenRepository tokenRepository;
+	TokenRepository tokenRepository;
 
 
-    @Override
-    public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
-        final String authHeader = request.getHeader(AUTHORIZATION);
-        final String jwt;
+	@Override
+	public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+		final String authHeader = request.getHeader(AUTHORIZATION);
+		final String jwt;
 
-        if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
-            return;
-        }
+		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+			return;
+		}
 
-        jwt = authHeader.substring(7);
-        var storedToken = tokenRepository.findByToken(jwt).orElse(null);
+		jwt = authHeader.substring(7);
+		var storedToken = tokenRepository.findByToken(jwt).orElse(null);
 
-        if (storedToken != null) {
-            storedToken.setExpired(true);
-            storedToken.setRevoked(true);
-            tokenRepository.save(storedToken);
-            //  Explicitly clears the context value from the current thread
-            SecurityContextHolder.clearContext();
-        }
-    }
+		if (storedToken != null) {
+			storedToken.setExpired(true);
+			storedToken.setRevoked(true);
+			tokenRepository.save(storedToken);
+			//  Explicitly clears the context value from the current thread
+			SecurityContextHolder.clearContext();
+		}
+	}
 }
