@@ -17,18 +17,18 @@ import java.nio.file.Paths;
 @UtilityClass
 @Slf4j
 public class ResourceLoader {
-    private static final String PATH_SEPARATOR = "/";
+	private static final String PATH_SEPARATOR = "/";
 
-    public static String loadTextFile(String directoryPath, String filePath) throws ResourceLoadingException {
-        Path path = Paths.get(directoryPath + PATH_SEPARATOR + filePath);
-        if (Files.isReadable(path)) {
-            try {
-                return Files.readString(path);
-            } catch (IOException e) {
-                throw new ResourceLoadingException(String.format("File %s read error " + e.getMessage(), filePath), e);
-            }
-        } else {
-            throw new ResourceLoadingException(String.format("The file %s is not readable", path));
-        }
-    }
+	public static String loadTextFile(String directoryPath, String filePath) throws ResourceLoadingException {
+		Path path = Paths.get(directoryPath + PATH_SEPARATOR + filePath);
+		if (Files.isReadable(path)) {
+			try {
+				return Files.readString(path);
+			} catch (IOException e) {
+				throw new ResourceLoadingException(String.format("File %s read error " + e.getMessage(), filePath), e);
+			}
+		} else {
+			throw new ResourceLoadingException(String.format("The file %s is not readable", path));
+		}
+	}
 }

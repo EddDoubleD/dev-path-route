@@ -9,5 +9,4 @@ public class DevPathRouteApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DevPathRouteApplication.class, args);
 	}
-
 }
