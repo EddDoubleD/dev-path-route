@@ -3,6 +3,7 @@
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)<br/>
+[![build](https://github.com/EddDoubleD/dev-path-route/actions/workflows/build.yml/badge.svg)](https://github.com/EddDoubleD/dev-path-route/actions/workflows/build.yml)
 
 ## Build docker
 Use the liberica image, depending on the architecture of your runners:
