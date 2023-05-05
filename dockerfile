@@ -5,7 +5,5 @@ LABEL maintainer="sulimov.dmitriy@otr.ru"
 WORKDIR /app
 ARG JAR_FILE
 COPY ${JAR_FILE} app.jar
-# The plugin does not start in automatic mode, we do not display ports outside
-#EXPOSE 8080
-#ENTRYPOINT ["java","-jar","app.jar"]
-CMD echo 'Run as command line application'
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]
