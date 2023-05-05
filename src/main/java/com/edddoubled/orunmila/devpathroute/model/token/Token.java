@@ -1,6 +1,6 @@
 package com.edddoubled.orunmila.devpathroute.model.token;
 
-import com.edddoubled.orunmila.devpathroute.model.user.BaseEntity;
+import com.edddoubled.orunmila.devpathroute.model.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.mongodb.core.mapping.Document;

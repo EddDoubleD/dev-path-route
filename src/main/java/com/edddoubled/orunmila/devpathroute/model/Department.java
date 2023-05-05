@@ -1,24 +1,25 @@
 package com.edddoubled.orunmila.devpathroute.model;
 
-import com.edddoubled.orunmila.devpathroute.model.user.BaseEntity;
 import com.edddoubled.orunmila.devpathroute.model.user.User;
 import lombok.*;
+import lombok.EqualsAndHashCode.Include;
 import lombok.experimental.FieldDefaults;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-import java.util.List;
+import java.util.Set;
 
 @Document
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Department extends BaseEntity {
 
+	@Include
 	String name;
 
-	@DocumentReference(lazy = true)
-	List<User> users;
+	@DBRef
+	Set<User> users;
 }

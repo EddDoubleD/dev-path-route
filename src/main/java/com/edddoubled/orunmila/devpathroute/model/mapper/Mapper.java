@@ -20,7 +20,7 @@ public class Mapper {
 
 	public DepartmentDTO departmentToDto(@NotNull Department department) {
 		return new DepartmentDTO(department.getName(),
-				Optional.ofNullable(department.getUsers()).orElse(Collections.emptyList())
+				Optional.ofNullable(department.getUsers()).orElse(Collections.emptySet())
 						.stream()
 						.map(this::userToDto).toList());
 	}

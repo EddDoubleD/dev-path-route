@@ -2,6 +2,7 @@ package com.edddoubled.orunmila.devpathroute.service;
 
 import com.edddoubled.orunmila.devpathroute.model.Department;
 import com.edddoubled.orunmila.devpathroute.repository.DepartmentRepository;
+import com.edddoubled.orunmila.devpathroute.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class DepartmentService {
+	UserRepository userRepository;
 	DepartmentRepository departmentRepository;
 
 	public Department createDepartment(String departmentName) {
