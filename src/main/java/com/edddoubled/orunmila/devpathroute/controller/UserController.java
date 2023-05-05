@@ -3,6 +3,7 @@ package com.edddoubled.orunmila.devpathroute.controller;
 import com.edddoubled.orunmila.devpathroute.annotation.AdminRequired;
 import com.edddoubled.orunmila.devpathroute.annotation.ManagerRequired;
 import com.edddoubled.orunmila.devpathroute.exception.NotFoundException;
+import com.edddoubled.orunmila.devpathroute.model.dto.DepartmentRequest;
 import com.edddoubled.orunmila.devpathroute.model.dto.UserDTO;
 import com.edddoubled.orunmila.devpathroute.model.dto.UserDepartmentRequest;
 import com.edddoubled.orunmila.devpathroute.model.dto.UserRequest;
@@ -17,6 +18,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/management/users")
@@ -34,6 +37,13 @@ public class UserController {
 		User deletedUser = userService.deleteUserByName(userRequest.getUsername());
 		return ResponseEntity.ok(mapper.userToDto(deletedUser));
 	}
+
+	/*@PostMapping("/change-role")
+	@AdminRequired()
+	public ResponseEntity<UserDTO> changeRole(@RequestBody @NotNull UserRequest userRequest) throws NotFoundException {
+
+		return ResponseEntity.ok(...);
+	}*/
 
 	@PostMapping("/add-to-department/")
 	@ManagerRequired()
@@ -53,5 +63,10 @@ public class UserController {
 		}
 
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  }
+
+	@PostMapping("/by-department")
+	public ResponseEntity<List<UserDTO>> getUserByDepartment(@RequestBody @NotNull DepartmentRequest departmentRequest) throws NotFoundException {
+		return ResponseEntity.ok(userService.getUsersByDepartment(departmentRequest.getDepartmentName()));
 	}
 }
