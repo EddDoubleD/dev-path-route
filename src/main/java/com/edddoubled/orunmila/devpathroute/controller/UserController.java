@@ -12,17 +12,17 @@ import com.edddoubled.orunmila.devpathroute.service.UserService;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/management/users")
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
 public class UserController {
 
 	UserService userService;
@@ -41,5 +41,17 @@ public class UserController {
 		User user = userService.getUserByName(userDepartmentRequest.getUsername());
 		user = userService.addUserToDepartment(user, userDepartmentRequest.getDepartmentName());
 		return ResponseEntity.ok(mapper.userToDto(user));
+	}
+
+	@GetMapping("/get/{username}")
+	public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+		try {
+			User user = userService.getUserByName(username);
+			return ResponseEntity.ok(user);
+		} catch (NotFoundException e) {
+			log.warn("User{} not found", username);
+		}
+
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 }
