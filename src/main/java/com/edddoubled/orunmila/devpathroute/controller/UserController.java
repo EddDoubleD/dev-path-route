@@ -3,7 +3,6 @@ package com.edddoubled.orunmila.devpathroute.controller;
 import com.edddoubled.orunmila.devpathroute.annotation.AdminRequired;
 import com.edddoubled.orunmila.devpathroute.annotation.ManagerRequired;
 import com.edddoubled.orunmila.devpathroute.exception.NotFoundException;
-import com.edddoubled.orunmila.devpathroute.model.dto.DepartmentRequest;
 import com.edddoubled.orunmila.devpathroute.model.dto.UserDTO;
 import com.edddoubled.orunmila.devpathroute.model.dto.UserDepartmentRequest;
 import com.edddoubled.orunmila.devpathroute.model.dto.UserRequest;
@@ -15,7 +14,6 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,20 +51,14 @@ public class UserController {
 		return ResponseEntity.ok(mapper.userToDto(user));
 	}
 
-	@GetMapping("/get/{username}")
-	public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
-		try {
-			User user = userService.getUserByName(username);
-			return ResponseEntity.ok(user);
-		} catch (NotFoundException e) {
-			log.warn("User{} not found", username);
-		}
+	@GetMapping("/get/{userName}")
+	public ResponseEntity<UserDTO> getUserByUsername(@PathVariable String userName) throws NotFoundException {
+		UserDTO user = userService.getUserDtoByName(userName);
+		return ResponseEntity.ok(user);
+	}
 
-		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  }
-
-	@PostMapping("/by-department")
-	public ResponseEntity<List<UserDTO>> getUserByDepartment(@RequestBody @NotNull DepartmentRequest departmentRequest) throws NotFoundException {
-		return ResponseEntity.ok(userService.getUsersByDepartment(departmentRequest.getDepartmentName()));
+	@GetMapping("/get/by-department/{departmentName}")
+	public ResponseEntity<List<UserDTO>> getUserByDepartment(@PathVariable String departmentName) throws NotFoundException {
+		return ResponseEntity.ok(userService.getUsersByDepartment(departmentName));
 	}
 }

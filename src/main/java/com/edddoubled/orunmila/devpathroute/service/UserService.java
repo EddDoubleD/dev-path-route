@@ -29,6 +29,10 @@ public class UserService {
 				.orElseThrow(() -> new NotFoundException(String.format("Сотрудник [%s] не найден", userName)));
 	}
 
+	public UserDTO getUserDtoByName(String userName) throws NotFoundException {
+		return mapper.userToDto(getUserByName(userName));
+	}
+
 	public List<UserDTO> getUsersByDepartment(String departmentName) throws NotFoundException {
 		Department department = departmentRepository.findByName(departmentName)
 				.orElseThrow(() -> new NotFoundException(String.format("Отдел [%s] не найден", departmentName)));
