@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +29,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
 public class AuthenticationService {
 	UserRepository userRepository;
 	TokenRepository tokenRepository;
@@ -55,12 +57,18 @@ public class AuthenticationService {
 	}
 
 	public AuthenticationResponse authenticate(@NotNull AuthenticationRequest request) {
-		authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(
-						request.getUsername(),
-						request.getPassword()
-				)
-		);
+		try {
+			authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(
+							request.getUsername(),
+							request.getPassword()
+					)
+			);
+		} catch (Exception e) {
+			// TODO: Bad credentials - неправильный пароль
+			log.error(e.getMessage(), e);
+			throw e;
+		}
 
 		var user = userRepository.findByUsername(request.getUsername()).orElseThrow();
 		var jwtToken = jwtService.generateToken(user);

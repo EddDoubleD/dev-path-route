@@ -20,6 +20,6 @@ public class Department extends BaseEntity {
 	@Include
 	String name;
 
-	@DBRef
+	@DBRef(lazy = true)
 	Set<User> users;
 }

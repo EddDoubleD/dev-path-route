@@ -4,7 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 @Data
-@Builder
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
